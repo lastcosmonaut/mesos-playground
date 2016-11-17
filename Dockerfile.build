@@ -1,0 +1,30 @@
+FROM ubuntu:15.10
+
+# http://archive.apache.org/dist/mesos/1.1.0/mesos-1.1.0.tar.gz
+
+ARG MESOS_VERSION=1.1.0
+ENV MESOS_APP_VERSION=1.1.0
+
+WORKDIR /
+
+# Download dependencies
+RUN apt-get update
+RUN apt-get -yq install wget git openjdk-7-jdk build-essential python-dev libcurl4-nss-dev libsasl2-dev libsasl2-modules maven libapr1-dev libsvn-dev
+
+# Download mesos sources
+
+RUN wget http://www.apache.org/dist/mesos/1.1.0/mesos-1.1.0.tar.gz
+RUN tar -zxf mesos-${MESOS_VERSION}.tar.gz
+
+# Configure build
+WORKDIR /mesos-${MESOS_VERSION}
+RUN mkdir build
+WORKDIR /mesos-${MESOS_VERSION}/build/
+RUN ../configure
+
+# Build & install
+RUN make install
+
+# Some miscellaneous stuff
+RUN mkdir -p /var/lib/mesos/
+RUN mkdir -p /var/log/mesos/

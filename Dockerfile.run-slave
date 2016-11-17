@@ -1,0 +1,5 @@
+FROM mesos
+
+ENV MESOS_LAUNCHER=posix
+
+CMD /mesos-${MESOS_APP_VERSION}/build/bin/mesos-slave.sh --master=master:5050 --work_dir=/var/lib/mesos/ --log_dir=/var/log/mesos/ --containerizers=mesos,docker

@@ -1,0 +1,3 @@
+FROM mesos
+EXPOSE 5050 2181
+CMD /mesos-${MESOS_APP_VERSION}/build/bin/mesos-master.sh --work_dir=/var/lib/mesos/ --log_dir=/var/log/mesos/ --zk=zk://zookeeper:2181/mesos --quorum=1
