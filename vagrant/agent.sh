@@ -1,4 +1,5 @@
 sudo systemctl stop firewalld
+sudo sed -i '1s/^/nameserver 10.111.111.10\n /' /etc/resolv.conf
 sudo rpm -Uvh http://repos.mesosphere.com/el/7/noarch/RPMS/mesosphere-el-repo-7-1.noarch.rpm
 sudo yum -y install mesos java-1.7.0-openjdk
 sudo tee /etc/yum.repos.d/docker.repo <<-'EOF'
