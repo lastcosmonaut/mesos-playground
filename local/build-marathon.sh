@@ -12,7 +12,7 @@ sudo echo debconf shared/accepted-oracle-license-v1-1 select true | sudo debconf
 sudo echo debconf shared/accepted-oracle-license-v1-1 seen true | sudo debconf-set-selections
 sudo apt-get -y install sbt git oracle-java8-installer
 
-cd /tmp/
+
 git clone https://github.com/mesosphere/marathon.git
 cd marathon
 sbt assembly
