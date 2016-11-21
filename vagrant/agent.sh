@@ -1,3 +1,4 @@
+sudo systemctl stop firewalld
 sudo rpm -Uvh http://repos.mesosphere.com/el/7/noarch/RPMS/mesosphere-el-repo-7-1.noarch.rpm
 sudo yum -y install mesos
 sudo tee /etc/yum.repos.d/docker.repo <<-'EOF'
@@ -13,4 +14,4 @@ sudo systemctl enable docker.service
 sudo systemctl start docker
 sudo docker run --rm hello-world
 sudo usermod -aG docker vagrant
-sudo mesos agent --master=10.111.111.10:5050 --work_dir=/var/lib/mesos-agent/ --log_dir=/var/log/mesos/ --containerizers=mesos,docker > mesos.log 2>&1 &
+sudo nohup mesos agent --master=10.111.111.10:5050 --work_dir=/var/lib/mesos-agent/ --log_dir=/var/log/mesos/ --containerizers=mesos,docker --ip=${VAGRANT_IP} > mesos.log 2>&1 &

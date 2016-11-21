@@ -12,24 +12,17 @@ Vagrant.configure("2") do |config|
     master.vm.provision "shell", path: "master.sh"
   end
 
-  config.vm.define "mesos-agent1" do |agent|
-    agent.vm.box = "centos/7"
-    agent.vm.network "private_network", ip: "10.111.111.11"
-    agent.vm.provider "virtualbox" do |vb|
-      vb.name = "mesos-agent1"
-      vb.memory = "1024"
-    end
-    agent.vm.provision "shell", path: "agent.sh"
-  end
+  agents = [1, 2]
 
-  config.vm.define "mesos-agent2" do |agent|
-    agent.vm.box = "centos/7"
-    agent.vm.network "private_network", ip: "10.111.111.12"
-    agent.vm.provider "virtualbox" do |vb|
-      vb.name = "mesos-agent2"
-      vb.memory = "1024"
+  agents.each do | agentNumber |
+    config.vm.define "mesos-agent#{agentNumber}" do |agent|
+      agent.vm.box = "centos/7"
+      agent.vm.network "private_network", ip: "10.111.111.1#{agentNumber}"
+      agent.vm.provider "virtualbox" do |vb|
+        vb.name = "mesos-agent#{agentNumber}"
+        vb.memory = "1024"
+      end
+      agent.vm.provision "shell", path: "agent.sh", env: {"VAGRANT_IP" => "10.111.111.1#{agentNumber}"}
     end
-    agent.vm.provision "shell", path: "agent.sh"
   end
-
 end
