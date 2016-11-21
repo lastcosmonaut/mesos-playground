@@ -25,3 +25,8 @@ sudo nohup sudo java -jar kafka-mesos-0.9.5.1.jar scheduler --master=10.111.111.
 #cd flink
 #git checkout release-1.1.3
 #mvn clean package -DskipTests
+
+cd /home/vagrant/
+wget https://github.com/mesosphere/mesos-dns/releases/download/v0.6.0/mesos-dns-v0.6.0-linux-amd64
+chmod +x mesos-dns-v0.6.0-linux-amd64
+sudo ./mesos-dns-v0.6.0-linux-amd64
