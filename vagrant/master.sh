@@ -30,3 +30,8 @@ cd /home/vagrant/
 wget https://github.com/mesosphere/mesos-dns/releases/download/v0.6.0/mesos-dns-v0.6.0-linux-amd64
 chmod +x mesos-dns-v0.6.0-linux-amd64
 sudo nohup sudo ./mesos-dns-v0.6.0-linux-amd64 > mesos-dns.log 2>&1 &
+
+
+# add nginx to marathon
+curl -X POST -H "Content-Type: application/json" http://10.111.111.10:8080/v2/apps -d@nginx.json
+#curl -v nginx.marathon.mesos
