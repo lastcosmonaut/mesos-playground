@@ -1,5 +1,5 @@
 sudo rpm -Uvh http://repos.mesosphere.com/el/7/noarch/RPMS/mesosphere-el-repo-7-1.noarch.rpm
-sudo yum -y install mesos marathon wget git java-1.7.0-openjdk
+sudo yum -y install mesos marathon wget git java-1.7.0-openjdk maven
 sudo systemctl stop firewalld
 mkdir -p /var/zookeeper
 wget http://www-eu.apache.org/dist/zookeeper/zookeeper-3.4.9/zookeeper-3.4.9.tar.gz
@@ -19,3 +19,9 @@ export LIBPROCESS_IP=10.111.111.10
 sudo nohup sudo java -jar kafka-mesos-0.9.5.1.jar scheduler --master=10.111.111.10:5050 --api=http://10.111.111.10:7000 --zk=10.111.111.10:2181 --bind-address=10.111.111.10 > kafka-mesos.log 2>&1 &
 #sudo java -jar kafka-mesos-0.9.5.1.jar broker --api=http://10.111.111.10:7000 add 0,1
 #sudo java -jar kafka-mesos-0.9.5.1.jar broker --api=http://10.111.111.10:7000 start 0,1
+
+#cd /home/vagrant/
+#git clone https://github.com/apache/flink.git
+#cd flink
+#git checkout release-1.1.3
+#mvn clean package -DskipTests
