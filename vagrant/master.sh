@@ -17,14 +17,10 @@ wget https://github.com/mesos/kafka/releases/download/v0.9.5.1/kafka-mesos-0.9.5
 export MESOS_NATIVE_JAVA_LIBRARY=/usr/local/lib/libmesos.so
 export LIBPROCESS_IP=10.111.111.10
 sudo nohup sudo java -jar kafka-mesos-0.9.5.1.jar scheduler --master=10.111.111.10:5050 --api=http://10.111.111.10:7000 --zk=10.111.111.10:2181 --bind-address=10.111.111.10 > kafka-mesos.log 2>&1 &
+
+# Manually scale kafka
 #sudo java -jar kafka-mesos-0.9.5.1.jar broker --api=http://10.111.111.10:7000 add 0,1
 #sudo java -jar kafka-mesos-0.9.5.1.jar broker --api=http://10.111.111.10:7000 start 0,1
-
-#cd /home/vagrant/
-#git clone https://github.com/apache/flink.git
-#cd flink
-#git checkout release-1.1.3
-#mvn clean package -DskipTests
 
 cd /home/vagrant/
 wget https://github.com/mesosphere/mesos-dns/releases/download/v0.6.0/mesos-dns-v0.6.0-linux-amd64
@@ -32,6 +28,9 @@ chmod +x mesos-dns-v0.6.0-linux-amd64
 sudo nohup sudo ./mesos-dns-v0.6.0-linux-amd64 > mesos-dns.log 2>&1 &
 
 
-# add nginx to marathon
+# add nginx to marathon to test dns
 #curl -X POST -H "Content-Type: application/json" http://10.111.111.10:8080/v2/apps -d@nginx.json
 #curl -v nginx.marathon.mesos
+
+# another dns test from outside of vm
+# dig @10.111.111.10 nginx.marathon.mesos
